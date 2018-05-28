@@ -26,3 +26,4 @@ npm-debug.log
 # variables.
 /config/*.secret.exsconfig/dev.exs
 /config/dev.exs
+/config/test.exs
