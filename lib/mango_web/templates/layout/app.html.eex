@@ -13,7 +13,7 @@
 
   <body>
   <!-- Navigation code -->
-    <%= render "app_nav.html" %>
+    <%= render "app_nav.html", conn: @conn %>
     <div class="container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

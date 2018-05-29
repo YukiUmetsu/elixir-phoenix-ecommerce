@@ -11,6 +11,12 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
+## Test
+This application uses hound with phantomjs for end-to-end testing.
+The code will use a simple browser to check what is on the page.
+
+Start the webdriver before testing: `mix phantomjs`
+
 ## Learn more
 
   * Official website: http://www.phoenixframework.org/
