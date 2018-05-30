@@ -42,6 +42,7 @@ defmodule Mango.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:hound, "~> 1.0"},
+      {:nimble_csv, "~> 0.1.0"}
     ]
   end
 
@@ -56,7 +57,8 @@ defmodule Mango.Mixfile do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "test": ["ecto.create --quiet", "ecto.migrate", "test"],
-      "phantomjs": ["cmd phantomjs --wd"]
+      "phantomjs": ["cmd phantomjs --wd"],
+      "seed": ["run priv/repo/seeds.exs"],
     ]
   end
 end

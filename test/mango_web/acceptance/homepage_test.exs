@@ -1,8 +1,17 @@
 defmodule MangoWeb.HomepageTest do
-  use ExUnit.Case
+  use Mango.DataCase
   use Hound.Helpers
 
   hound_session()
+
+  setup do
+    ## GIVEN ##
+    alias Mango.Repo
+    alias Mango.Catalog.Product
+
+    %Product{ name: "Tomato", price: 55, sku: "A123", is_seasonal: false, category: "vegetables" } |> Repo.insert
+    %Product{ name: "Apple", price: 75, sku: "B232", is_seasonal: true, category: "fruits" } |> Repo.insert
+  end
 
   test "presence of featured products" do
     ## GIVEN ##
