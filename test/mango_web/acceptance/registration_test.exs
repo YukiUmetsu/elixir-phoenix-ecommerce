@@ -1,20 +1,12 @@
-defmodule MangoWeb.HomepageTest do
+defmodule MangoWeb.Acceptance.RegistrationTest do
   use Mango.DataCase
   use Hound.Helpers
 
   hound_session()
 
-  setup do
-    ## GIVEN ##
-  end
-
-  test "presence of featured products" do
-    ## GIVEN ##
-
-    ## WHEN ##
+  test "registers an account with valid data" do
     navigate_to("/register")
 
-    ## THEN ##
     form = find_element(:id, "registration-form")
     find_within_element(form, :name, "registration[name]")
     |> fill_field("John")
@@ -25,8 +17,8 @@ defmodule MangoWeb.HomepageTest do
     find_within_element(form, :name, "registration[phone]")
     |> fill_field("1111")
 
-    find_within_element(form, :name, "registration[residence_area]")
-    |> fill_field("Area 1")
+    find_element(:css, "#registration_residence_area option[value='Adair County']")
+    |> click
 
     find_within_element(form, :name, "registration[password]")
     |> fill_field("password")
@@ -34,10 +26,11 @@ defmodule MangoWeb.HomepageTest do
     find_within_element(form, :tag, "button")
     |> click
 
-    assert current_path == "/"
+    assert current_path() == "/"
     message = find_element(:class, "alert")
               |> visible_text()
-    assert message == "Registration successful"
+
+    assert message == "Registration was successful"
   end
 
   test "shows error messages on invalid data" do
@@ -47,8 +40,8 @@ defmodule MangoWeb.HomepageTest do
     find_within_element(form, :tag, "button") |> click
 
     assert current_path() == "/register"
-
     message = find_element(:id, "form-error") |> visible_text()
     assert message == "Oops, something went wrong! Please check the errors below."
   end
+
 end

@@ -20,7 +20,7 @@ defmodule Mango.Mixfile do
   def application do
     [
       mod: {Mango.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -45,6 +45,8 @@ defmodule Mango.Mixfile do
       {:nimble_csv, "~> 0.1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12.0"},
+      {:httpoison, "~> 1.0"},
+      {:blankable, "~> 0.0.1"},
     ]
   end
 

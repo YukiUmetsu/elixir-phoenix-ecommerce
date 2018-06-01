@@ -7,7 +7,6 @@ defmodule Mango.CRM.Customer do
   schema "customers" do
     field :email, :string
     field :name, :string
-    field :customer, :string
     field :password, :string, virtual: true
     field :password_hash, :string
     field :phone, :string

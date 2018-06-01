@@ -4,7 +4,8 @@ defmodule MangoWeb.RegistrationController do
 
   def new(conn, _params) do
     changeset = CRM.build_customer()
-    render(conn, "new.html", changeset: changeset)
+    resident_areas = Mango.Area.ResidenceService.list_areas
+    render(conn, "new.html", changeset: changeset, resident_areas: resident_areas)
   end
 
   def create(conn, %{"registration" => registration_params}) do
@@ -15,8 +16,11 @@ defmodule MangoWeb.RegistrationController do
         |> redirect(to: page_path(conn, :index))
 
       {:error, changeset} ->
+        resident_areas = Mango.Area.ResidenceService.list_areas
+        changeset = %{changeset | action: :insert, errors: changeset.errors}
+
         conn
-        |> render(:new, changeset: changeset)
+        |> render(:new, changeset: changeset, resident_areas: resident_areas)
     end
   end
 end
