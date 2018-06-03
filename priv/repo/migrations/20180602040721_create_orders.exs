@@ -3,7 +3,7 @@ defmodule Mango.Repo.Migrations.CreateOrders do
 
   def change do
     create table(:orders) do
-      add :state, :string
+      add :status, :string
       add :total, :decimal
       add :line_items, {:array, :map}
 

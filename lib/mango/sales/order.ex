@@ -5,16 +5,27 @@ defmodule Mango.Sales.Order do
 
 
   schema "orders" do
-    field :state, :string
+    field :status, :string
     field :total, :decimal
     embeds_many :line_items, LineItem, on_replace: :delete
     timestamps()
   end
 
   @doc false
-  def changeset(order, attrs) do
+  def changeset(%Order{} = order, attrs) do
     order
-    |> cast(attrs, [:state, :total, :line_items])
-    |> validate_required([:state, :total, :line_items])
+    |> cast(attrs, [:status, :total])
+    |> cast_embed(:line_items, required: true, with: &LineItem.changeset/2)
+    |> set_order_total
+    |> validate_required([:status, :total])
+  end
+
+  def set_order_total(changeset) do
+    items = get_field(changeset, :line_items)
+    total = Enum.reduce(items, Decimal.new(0), fn(item, acc) ->
+      Decimal.add(acc, item.total)
+    end)
+    changeset
+    |> put_change(:total, total)
   end
 end

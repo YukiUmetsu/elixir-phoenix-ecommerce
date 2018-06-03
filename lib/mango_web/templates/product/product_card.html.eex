@@ -8,6 +8,7 @@
         </span>
       </h2>
        <hr/>
+        <%= render "cart_form.html", product: @product, conn: @conn %>
     </div>
     <img src="<%= @product.image %>" />
 </div>
