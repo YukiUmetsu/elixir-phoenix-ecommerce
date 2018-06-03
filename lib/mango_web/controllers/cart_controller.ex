@@ -6,26 +6,37 @@ defmodule MangoWeb.CartController do
     cart = conn.assigns.cart
 
     case Sales.add_to_cart(cart, cart_params) do
-      {:ok, _} ->
-        %{"product_name" => name, "pack_size"=> size, "quantity"=>qty } = cart_params
-        message = "Product added to the card - #{name}(#{size}) x #{qty} qty"
-
-        conn
-        |> put_flash(:info, message)
-        |> redirect(to: page_path(conn, :index))
+      {:ok, cart} ->
+        render(conn, "add.json", cart: cart, cart_params: cart_params)
 
       {:error, _} ->
         conn
         |> put_flash(:info, "Error adding product to cart")
         |> redirect(to: page_path(conn, :index))
     end
-
-    render(conn, "new.html")
   end
 
   def show(conn, _params) do
     cart = conn.assigns.cart
-    render conn, "show.html", cart: cart
+    cart_changeset = Sales.change_cart(cart)
+    render conn, "show.html", cart: cart, cart_changeset: cart_changeset
   end
 
+  def update(conn, %{"order"=>cart_params}) do
+    cart = conn.assigns.cart
+    case Sales.update_cart(cart, cart_params) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Cart updated successfully")
+        |> redirect(to: cart_path(conn, :show))
+
+      {:error, error} ->
+        require IEx
+        IEx.pry
+        conn
+        |> put_flash(:info, "Error updating the cart")
+        |> redirect(to: cart_path(conn, :show))
+
+    end
+  end
 end

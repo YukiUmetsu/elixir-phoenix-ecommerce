@@ -31,7 +31,13 @@ defmodule Mango.Sales do
     add_new_items(cart, new_item, existing_line_items)
   end
 
+  def change_cart(%Order{} = order) do
+    Order.changeset(order, %{})
+  end
+
   def update_cart(cart, attrs) do
+    #require IEx
+    #IEx.pry
     cart
     |> Order.changeset(attrs)
     |> Repo.update

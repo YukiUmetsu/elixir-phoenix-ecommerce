@@ -32,7 +32,7 @@ defmodule MangoWeb.CategoryPageTest do
 
     assert product_name == "Apple"
     # And I expect its price to be displayed on screen
-    assert product_price == "100"
+    assert product_price == "150"
 
     # And I expect that Tomato is not present on screen.
     refute page_source() =~ "Tomato"
@@ -53,9 +53,9 @@ defmodule MangoWeb.CategoryPageTest do
     product_name = find_within_element(product, :css, ".product-name") |> visible_text()
     product_price = find_within_element(product, :css, ".product-price") |> visible_text()
 
-    assert product_name == "Tomato"
+    assert product_name == "Green Chilli"
     # And I expect its price to be displayed on screen
-    assert product_price == "50"
+    assert product_price == "15"
 
     # And I expect that Apple is not present on screen.
     refute page_source() =~ "Apple"

@@ -14,12 +14,14 @@ defmodule MangoWeb.SessionController do
         |> render("new.html")
 
       customer ->
+        path = get_session(conn, :redirect_to) || page_path(conn, :index)
         conn
+        |> put_session(:redirect_to, nil)
         |> assign(:current_customer, customer)
         |> put_session(:customer_id, customer.id)
         |> configure_session(renew: true)
         |> put_flash(:info, "Login successful")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: path)
     end
   end
 

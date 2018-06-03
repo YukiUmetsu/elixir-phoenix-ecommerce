@@ -1,4 +1,4 @@
-<%= form_for @conn, "/cart",[class: "cart-form form-inline", as: :cart], fn f -> %>
+<%= form_for @conn, "/cart", [class: "cart-form form-inline", as: :cart], fn f -> %>
     <div class="form-group">
         <div class="input-group">
             <%= hidden_input f, :product_name, value: @product.name %>
@@ -10,5 +10,5 @@
         <%= error_tag f, :quantity %>
     </div>
 
-    <%= submit "Add to card", class: "btn btn-primary pull-right" %>
+    <%= submit "Add to cart", class: "btn btn-primary pull-right" %>
 <% end %>
