@@ -3,14 +3,22 @@ defmodule Mango.Sales do
   alias Mango.Sales.Order
   import Helpers.Types, only: [to_integer: 1]
 
+  @doc """
+  get cart data by id
+"""
   def get_cart(id) do
     Order
     |> Repo.get_by(id: id, status: "In Cart")
   end
 
+
+  @doc """
+  create an empty cart
+"""
   def create_cart do
     %Order{status: "In Cart"}  |> Repo.insert!()
   end
+
 
   @doc """
   add to cart when line_items not exists
@@ -31,17 +39,24 @@ defmodule Mango.Sales do
     add_new_items(cart, new_item, existing_line_items)
   end
 
+
+  @doc """
+  get order changeset
+"""
   def change_cart(%Order{} = order) do
     Order.changeset(order, %{})
   end
 
+
+  @doc """
+  update the cart
+"""
   def update_cart(cart, attrs) do
-    #require IEx
-    #IEx.pry
     cart
     |> Order.changeset(attrs)
     |> Repo.update
   end
+
 
   @doc """
   real logit to add a new item to the existing cart
@@ -55,10 +70,11 @@ defmodule Mango.Sales do
         update_cart(cart, attrs)
 
       [item] ->
-        new_items_attr = get_new_items(item.product_id, new_item, existing_items)
+        new_items_attr = get_new_items(item.product_id, existing_items)
         update_cart(cart, new_items_attr)
     end
   end
+
 
   @doc """
   checks if certain product already exists in the existing items
@@ -72,7 +88,7 @@ defmodule Mango.Sales do
   @doc """
   return new line_items. If the same item exists, add 1 to its quantity
 """
-  def get_new_items(product_id, new_item, existing_items) do
+  def get_new_items(product_id, existing_items) do
     new_items = existing_items
     |> Enum.map(fn(item) ->
         case item.product_id == product_id do
@@ -83,4 +99,15 @@ defmodule Mango.Sales do
 
     %{line_items: new_items}
   end
+
+  @doc """
+  check if order submit from checkout form is valid. If valid, update it.
+"""
+  def confirm_order(%Order{} = order, params) do
+    attrs = Map.put(params, "status", "Confirmed")
+    order
+    |> Order.checkout_changeset(attrs)
+    |> Repo.update()
+  end
+
 end
