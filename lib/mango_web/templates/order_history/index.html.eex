@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Status</th>
+        <th>Products Ordered</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= for order <- @orders do %>
+    <tr>
+        <td><%= order.id %></td>
+        <td><%= order.status %></td>
+        <td><%= render_products(order.line_items) %></td>
+        <td>$ <%= order.total %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

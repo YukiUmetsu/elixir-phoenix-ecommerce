@@ -15,7 +15,7 @@ defmodule MangoWeb.Acceptance.CartTest do
     :ok
   end
 
-  test "presence of card form for each product" do
+  test "presence of cart form for each product" do
     navigate_to("/")
 
     products = find_all_elements(:css, ".product")

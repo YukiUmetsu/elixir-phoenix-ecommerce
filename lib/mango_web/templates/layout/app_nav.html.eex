@@ -26,6 +26,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><%= link "My Orders", to: "/orders" %></li>
                             <li><%= link "Log Out", to: "/logout" %></li>
                         </ul>
                     </li>

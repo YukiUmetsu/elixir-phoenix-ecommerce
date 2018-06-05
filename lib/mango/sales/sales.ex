@@ -2,6 +2,7 @@ defmodule Mango.Sales do
   alias Mango.Repo
   alias Mango.Sales.Order
   import Helpers.Types, only: [to_integer: 1]
+  import Ecto.Query, only: [from: 2]
 
   @doc """
   get cart data by id
@@ -108,6 +109,18 @@ defmodule Mango.Sales do
     order
     |> Order.checkout_changeset(attrs)
     |> Repo.update()
+  end
+
+  @doc """
+  list the user's checked out orders
+"""
+  def get_user_orders(customer_id, status) do
+    query = case status do
+      nil -> from o in Order, where: o.customer_id == ^customer_id, order_by: [desc: o.updated_at]
+      _ -> from o in Order, where: o.customer_id == ^customer_id and o.status == ^status, order_by: [desc: o.updated_at]
+    end
+
+    Repo.all(query)
   end
 
 end
