@@ -1,0 +1,19 @@
+<%= for item <- @items do %>
+<% product = get_product(item, @products) %>
+<div class="row">
+    <div class="float-left">
+        <div class="product-image col-sm-3">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+        </div>
+        <div class="product-info col-sm-9">
+            <h4 class="item-name"><%= item.product_name %></h4>
+            <ul class="list-group">
+                <li class="list-group-item">category: <span><%= product.category %></span></li>
+                <li class="list-group-item">quantity: <span><%= item.quantity %></span></li>
+                <li class="list-group-item">pack size: <span><%= item.pack_size %></span></li>
+                <li class="list-group-item">price: $<span><%= item.unit_price %></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<% end %>

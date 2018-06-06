@@ -1,13 +1,15 @@
 defmodule MangoWeb.OrderHistoryView do
   use MangoWeb, :view
+  import Helpers.Dates
 
-  def render_products(products) do
+  def get_product(item, products) do
     products
-    |> Enum.map(fn(product) -> format_product(product) end)
-    |> Enum.join(", ")
+    |> Enum.filter(fn(product) -> product.id === item.product_id end)
+    |> Enum.map(fn(product) -> product end)
+    |> List.first
   end
 
-  def format_product(product) do
-    "#{product.product_name} (#{product.quantity})"
+  def format_date(date) do
+    to_mdy(date)
   end
 end

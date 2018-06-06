@@ -1,20 +1,18 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th>Order ID</th>
-        <th>Status</th>
-        <th>Products Ordered</th>
-        <th>Total</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="order-history container">
     <%= for order <- @orders do %>
-    <tr>
-        <td><%= order.id %></td>
-        <td><%= order.status %></td>
-        <td><%= render_products(order.line_items) %></td>
-        <td>$ <%= order.total %></td>
-    </tr>
+    <div class="order list-group border-1 border-light rounded">
+        <div class="list-group-item order-header">
+            <ul class="list-group-item nav nav-pills">
+                <li class="mr-2em">Order Placed: <%= format_date(order.updated_at) %></li>
+                <li class="mx-2em">Status: <%= order.status %></li>
+                <li class="mx-2em">Total: $<%= order.total %></li>
+                <li class="mx-2em">Shipped to: <%= order.residence_area %></li>
+            </ul>
+        </div>
+        <div class="list-group-item order-items">
+            <%= render MangoWeb.OrderHistoryView, "item_history_card.html", items: order.line_items, products: @products %>
+        </div>
+    </div>
     <% end %>
-    </tbody>
-</table>
+    <hr>
+</div>

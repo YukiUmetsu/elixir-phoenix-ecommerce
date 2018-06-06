@@ -116,3 +116,30 @@ body {
 .admin-login {
   margin-top: 16rem;
 }
+
+.mr-2em {
+  margin-right: 2em;
+}
+
+.ml-2em {
+  margin-left: 2em;
+}
+
+.mx-1em {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.mx-2em {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.order-header {
+  background-color: rgba(166, 225, 236, 0.5);
+}
+
+.order-header .list-group-item{
+  border: 0 #ffffff;
+  background-color: rgba(166, 225, 236, 0);
+}
