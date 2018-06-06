@@ -1,4 +1,6 @@
 defmodule Mango.Catalog do
+  import Ecto.Query, only: [from: 2]
+
   @moduledoc false
   alias Mango.Catalog.Product
   alias Mango.Repo
@@ -19,4 +21,9 @@ defmodule Mango.Catalog do
   end
 
   def get_product!(id), do: Product |> Repo.get(id)
+
+  def get_products!(ids) do
+    query = from p in Product, where: p.id in ^ids
+    Repo.all(query)
+  end
 end

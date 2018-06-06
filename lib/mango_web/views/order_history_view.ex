@@ -1,6 +1,6 @@
 defmodule MangoWeb.OrderHistoryView do
   use MangoWeb, :view
-  import Helpers.Dates
+  import Helpers.Dates, only: [to_mdy: 1]
 
   def get_product(item, products) do
     products

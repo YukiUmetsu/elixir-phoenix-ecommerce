@@ -4,9 +4,6 @@ defmodule MangoWeb.OrderHistoryController do
   alias Mango.Catalog
   alias Mango.Sales.Order
 
-  # TODO
-  require IEx
-
   def index(conn, _params) do
     customer = conn.assigns.current_customer
     orders = Sales.get_user_orders(customer.id, "Confirmed")
@@ -16,11 +13,9 @@ defmodule MangoWeb.OrderHistoryController do
 
   def get_products_from_orders(orders) do
     products = Map.new()
-    orders
+    product_ids = orders
     |> Enum.flat_map(fn(order) -> order.line_items end)
-    |> Enum.flat_map(fn(item) ->
-      product = Catalog.get_product!(item.product_id)
-      [product]
-    end)
+    |> Enum.flat_map(fn(item) -> [item.product_id] end)
+    Catalog.get_products!(product_ids)
   end
 end
