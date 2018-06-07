@@ -2,37 +2,43 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary-nav">
-                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">
-            <img src="/images/logo.png"/> Mango </a>
+                <img src="/images/logo.png"/> Mango
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="primary-nav">
             <ul class="nav navbar-nav">
                 <li><%= link "Fruits", to: category_path(@conn, :show, "fruits") %></li>
                 <li><%= link "Vegetables", to: category_path(@conn, :show, "vegetables") %></li>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <%= link cart_link_text(@conn), to: cart_path(@conn, :show), class: "cart nav-link"%>
+                <li><%= link cart_link_text(@conn), to: cart_path(@conn, :show), class: "cart nav-link" %></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-globe"></i> I18n<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="<%= get_active_locale_class("en") %>">
+                            <a href="?locale=en">English</a>
+                        </li>
+                        <li class="<%= get_active_locale_class("fr") %>">
+                            <a href="?locale=fr">Français</a>
+                        </li>
+                    </ul>
                 </li>
                 <%= if @customer do %>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <%= @customer.name %>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><%= link "My Orders", to: "/orders" %></li>
-                            <li><%= link "Log Out", to: "/logout" %></li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @customer.name %><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><%= link "Log Out", to: "/logout" %></li>
+                    </ul>
+                </li>
                 <% else %>
-                  <li><%= link "Register", to: registration_path(@conn, :new), class: "nav-link" %></li>
-                  <li><%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %></li>
+                <li><%= link "Register", to: registration_path(@conn, :new), class: "nav-link" %></li>
+                <li><%= link "Sign in", to: session_path(@conn, :new), class: "nav-link" %></li>
                 <% end %>
             </ul>
         </div>

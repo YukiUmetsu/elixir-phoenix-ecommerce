@@ -143,3 +143,7 @@ body {
   border: 0 #ffffff;
   background-color: rgba(166, 225, 236, 0);
 }
+
+.product-image img {
+  max-width: 200px;
+}
