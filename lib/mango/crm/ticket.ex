@@ -1,7 +1,7 @@
 defmodule Mango.CRM.Ticket do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Mango.CRM.{Ticket, Customer}
+  alias Mango.CRM.Customer
 
 
   schema "tickets" do

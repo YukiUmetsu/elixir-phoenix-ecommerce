@@ -2,7 +2,6 @@ defmodule Mango.CatalogTest do
   use Mango.DataCase
   alias Mango.{Catalog, Repo}
   alias Mango.Catalog.Product
-  require IEx
 
   setup do
     Repo.insert %Product{ name: "Tomato", price: 55, sku: "A123", is_seasonal: false, category: "vegetables" }
@@ -11,7 +10,6 @@ defmodule Mango.CatalogTest do
   end
 
   test "list_products/0 returns all products" do
-    IEx.pry
     [p1 = %Product{}, p2 = %Product{}] = Catalog.list_products |> Enum.take(-2)
 
     assert p1.name == "Tomato"

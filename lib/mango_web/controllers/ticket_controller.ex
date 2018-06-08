@@ -2,7 +2,6 @@ defmodule MangoWeb.TicketController do
   use MangoWeb, :controller
 
   alias Mango.CRM
-  alias Mango.CRM.Ticket
 
   def index(conn, _params) do
     customer = conn.assigns.current_customer
