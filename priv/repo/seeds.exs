@@ -12,6 +12,7 @@
 alias NimbleCSV.RFC4180, as: CSV
 alias Mango.Repo
 alias Mango.Catalog.Product
+alias Mango.Administration
 
 Path.join(:code.priv_dir(:mango), "product_list.csv")
 |> File.read!
@@ -22,3 +23,6 @@ Path.join(:code.priv_dir(:mango), "product_list.csv")
   %Product{ name: name, price: price, sku: sku, is_seasonal: is_seasonal, image: image, pack_size: pack_size, category: category}
   |> Repo.insert
 end)
+
+user = %{"email" => "yuuki.umetsu@gmail.com", "name" => "Yuki Umetsu", "phone" => "4056428465"}
+Administration.create_user(user)

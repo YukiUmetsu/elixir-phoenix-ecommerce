@@ -20,7 +20,7 @@ defmodule Mango.Mixfile do
   def application do
     [
       mod: {Mango.Application, []},
-      extra_applications: [:logger, :runtime_tools, :httpoison]
+      extra_applications: [:logger, :runtime_tools, :httpoison, :bamboo, :bamboo_smtp]
     ]
   end
 
@@ -47,6 +47,8 @@ defmodule Mango.Mixfile do
       {:bcrypt_elixir, "~> 0.12.0"},
       {:httpoison, "~> 1.0"},
       {:blankable, "~> 0.0.1"},
+      {:bamboo, "~> 0.8"},
+      {:bamboo_smtp, "~> 1.4.0"}
     ]
   end
 
@@ -63,6 +65,8 @@ defmodule Mango.Mixfile do
       "test": ["ecto.create --quiet", "ecto.migrate", "test"],
       "phantomjs": ["cmd phantomjs --wd"],
       "seed": ["run priv/repo/seeds.exs"],
+      "server.s": ["cmd iex -S mix phx.server"],
+      "server.db": ["cmd postgres -D /usr/local/var/postgres"]
     ]
   end
 end

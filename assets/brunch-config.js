@@ -1,7 +1,10 @@
 exports.config = {
   files: {
     javascripts: {
-      joinTo: "js/app.js",
+      joinTo: {
+        "js/app.js":/^(js|node_modules|vendor)/,
+        "js/admin.js":/^(admin)/
+      },
       order: {
         before: [
           "vendor/js/jquery-3.2.1.min.js",

@@ -3,6 +3,10 @@
 /db
 /deps
 /*.ez
+/*.env
+priv/server.key
+priv/server.pem
+
 
 # Generated on crash by the VM
 erl_crash.dump
