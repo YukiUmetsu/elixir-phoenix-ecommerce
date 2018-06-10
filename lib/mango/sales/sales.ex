@@ -123,4 +123,14 @@ defmodule Mango.Sales do
     Repo.all(query)
   end
 
+  def get_order!(id) do
+    Order
+    |> Repo.get_by!(id: id, status: "Confirmed")
+  end
+
+  def get_oders() do
+    query = from o in Order, where: o.status == "Confirmed", order_by: [desc: o.updated_at]
+    Repo.all(query)
+  end
+
 end

@@ -1,0 +1,5 @@
+<h2>New Warehouse item</h2>
+
+<%= render "form.html", Map.put(assigns, :action, admin_warehouse_item_path(@conn, :create)) %>
+
+<span><%= link "Back", to: admin_warehouse_item_path(@conn, :index) %></span>

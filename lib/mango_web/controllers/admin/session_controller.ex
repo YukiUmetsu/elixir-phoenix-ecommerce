@@ -38,7 +38,7 @@ defmodule MangoWeb.Admin.SessionController do
         |> put_session(:admin_id, user.id)
         |> configure_session(renew: true)
         |> put_flash(:info, "Successfully logged in!")
-        |> redirect(to: admin_user_path(conn, :index))
+        |> redirect(to: admin_dashboard_path(conn, :show))
 
       {:error, _} ->
         conn
@@ -50,6 +50,12 @@ defmodule MangoWeb.Admin.SessionController do
   def generate_login_link(conn, user) do
     token = Phoenix.Token.sign(MangoWeb.Endpoint, "user", user.id)
     admin_session_url(conn, :create, %{token: token})
+  end
+
+  def delete(conn, _) do
+    clear_session(conn)
+    |> put_flash(:info, "You have been logged out")
+    |> redirect(to: page_path(conn, :index))
   end
 
 

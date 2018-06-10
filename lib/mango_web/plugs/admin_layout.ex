@@ -5,6 +5,6 @@ defmodule MangoWeb.Plugs.AdminLayout do
 
   def call(conn, _opts) do
     conn
-    |> put_layout({MongoWeb.LayoutView, "admin_app.html"})
+    |> put_layout({MangoWeb.LayoutView, "admin_app.html"})
   end
 end

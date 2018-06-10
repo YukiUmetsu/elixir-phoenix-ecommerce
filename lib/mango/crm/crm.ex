@@ -4,6 +4,10 @@ defmodule Mango.CRM do
 
   def get_customer(id), do: Repo.get(Customer, id)
 
+  def list_customers do
+    Customer |> Repo.all
+  end
+
   def build_customer(attrs \\ %{}) do
     %Customer{}
     |> Customer.changeset(attrs)

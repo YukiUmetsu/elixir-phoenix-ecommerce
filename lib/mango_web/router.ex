@@ -23,6 +23,7 @@ defmodule MangoWeb.Router do
 
   pipeline :admin do
     plug MangoWeb.Plugs.AdminLayout
+    plug MangoWeb.Plugs.LoadAdmin
   end
 
   scope "/", MangoWeb do
@@ -53,12 +54,26 @@ defmodule MangoWeb.Router do
     resources "/tickets", TicketController, except: [:edit, :update, :delete]
   end
 
+  #--- Not Authenticated Admin---#
   scope "/admin", MangoWeb.Admin, as: :admin do
     pipe_through [:browser, :admin]
-    resources "/users", UserController
+
     get "/login", SessionController, :new
     post "/sendlink", SessionController, :send_link
     get "/magiclink", SessionController, :create
+  end
+
+  scope "/admin", MangoWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin, MangoWeb.Plugs.AuthenticateAdmin]
+
+    get "/", DashboardController, :show
+    resources "/customers", CustomerController, only: [:index, :show]
+    resources "/orders", OrderController, only: [:index, :show]
+    resources "/users", UserController
+    get "/logout", SessionController, :delete
+
+    resources "/warehouse_items", WarehouseItemController
+    resources "/suppliers", SupplierController
   end
 
   # Other scopes may use custom stacks.
