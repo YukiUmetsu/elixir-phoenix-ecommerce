@@ -48,7 +48,8 @@ defmodule Mango.Mixfile do
       {:httpoison, "~> 1.0"},
       {:blankable, "~> 0.0.1"},
       {:bamboo, "~> 0.8"},
-      {:bamboo_smtp, "~> 1.4.0"}
+      {:bamboo_smtp, "~> 1.4.0"},
+      {:phoenix_gon, "~> 0.4.0"}
     ]
   end
 

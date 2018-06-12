@@ -24,6 +24,7 @@ defmodule MangoWeb.Router do
   pipeline :admin do
     plug MangoWeb.Plugs.AdminLayout
     plug MangoWeb.Plugs.LoadAdmin
+    plug PhoenixGon.Pipeline
   end
 
   scope "/", MangoWeb do

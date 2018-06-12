@@ -1,6 +1,7 @@
 defmodule MangoWeb.LayoutView do
   use MangoWeb, :view
   import MangoWeb.CartView, only: [cart_count: 1]
+  import PhoenixGon.View
 
   def get_active_locale_class(locale) do
     if Gettext.get_locale(MangoWeb.Gettext) == locale, do: "active"
