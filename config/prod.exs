@@ -15,13 +15,13 @@ use Mix.Config
 # which you typically run after static files are built.
 config :mango, MangoWeb.Endpoint,
   load_from_system_env: true,
-  http: [port: System.get_env("PORT")],
-  url: [host: System.get_env("HOST_DOMAIN"), port: 80],
+  http: [port: {:system, "PORT"}],
+  url: [host: {:system, "HOST_DOMAIN"}, port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   code_reloader: false,
   version: Mix.Project.config[:version],
-  check_origin: ["//*"<> System.get_env("HOST_DOMAIN")]
+  check_origin: ["//*#{System.get_env("HOST_DOMAIN")}"]
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -77,3 +77,6 @@ config :mango, Mango.Repo,
 
 config :mango, MangoWeb.Endpoint,
        secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+config :mango, Mango.Area.ResidenceService,
+       api_key: System.get_env("LOCATION_API_KEY")

@@ -1,18 +1,13 @@
 defmodule Mango.ReleaseTasks do
   @moduledoc false
 
-  @otp_app :myapp_api
-  @start_apps [:logger, :ssl, :postgrex, :ecto]
+  @otp_app :mango
 
   def seed do
-    init(@otp_app, @start_apps)
-
     "#{seed_path(@otp_app)}/*.exs"
     |> Path.wildcard()
     |> Enum.sort()
     |> Enum.each(&run_seed_script/1)
-
-    stop()
   end
 
   defp run_seed_script(seed_script) do
@@ -21,5 +16,5 @@ defmodule Mango.ReleaseTasks do
   end
 
   defp seed_path(app),
-       do: priv_dir(app, ["repo", "seeds"])
+       do: :code.priv_dir(app, ["repo", "seeds"])
 end
