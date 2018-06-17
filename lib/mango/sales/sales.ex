@@ -123,9 +123,22 @@ defmodule Mango.Sales do
     Repo.all(query)
   end
 
-  def get_order!(id) do
-    Order
-    |> Repo.get_by!(id: id, status: "Confirmed")
+  def get_order!(id, status \\ nil) do
+    case status do
+      nil ->
+        Order |> Repo.get_by!(id: id)
+      _ ->
+        Order |> Repo.get_by!(id: id, status: status)
+    end
+  end
+
+  def get_order(id, status \\ nil) do
+    case status do
+      nil ->
+        Order |> Repo.get_by(id: id)
+      status ->
+        Order |> Repo.get_by(id: id, status: status)
+    end
   end
 
   def get_oders() do
@@ -133,4 +146,9 @@ defmodule Mango.Sales do
     Repo.all(query)
   end
 
+  def pos_sale_complete(%Order{} = order) do
+    order
+     |> Order.changeset(%{"status" => "POS Sale"})
+     |> Repo.update()
+  end
 end

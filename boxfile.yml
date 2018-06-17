@@ -1,0 +1,25 @@
+run.config:
+  engine: elixir
+  dev_packages:
+    - nodejs
+    - inotify-tools
+  cache_dirs:
+    - node_modules
+  extra_path_dirs:
+    - node_modules/.bin
+  fs_watch: true
+
+deploy.config:
+  extra_steps:
+    - mix phoenix.digest
+  before_live:
+    web.main:
+      - mix ecto.create --quiet
+      - mix ecto.migrate
+      - PORT=8081 mix seed
+
+data.db:
+  image: nanobox/postgresql:9.5
+
+web.main:
+  start: node-start mix phx.server

@@ -4,14 +4,13 @@ defmodule MangoWeb.Admin.OrderController do
   alias Mango.Catalog
 
   def index(conn, _params) do
-    admin = conn.assigns.current_admin
     orders = Sales.get_oders()
     products = get_products_from_orders(orders)
     render(conn, "index.html", orders: orders, products: products)
   end
 
   def show(conn, %{"id" => id}) do
-    order = Sales.get_order!(id)
+    order = Sales.get_order!(id, "Confirmed")
     render(conn, "show.html", order: order)
   end
 

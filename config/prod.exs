@@ -15,8 +15,13 @@ use Mix.Config
 # which you typically run after static files are built.
 config :mango, MangoWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [port: System.get_env("PORT")],
+  url: [host: System.get_env("HOST_DOMAIN"), port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  code_reloader: false,
+  version: Mix.Project.config[:version],
+  check_origin: ["//*"<> System.get_env("HOST_DOMAIN")]
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -61,4 +66,14 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
+config :mango, Mango.Repo,
+       adapter: Ecto.Adapters.Postgres,
+       username: System.get_env("DATA_DB_USER"),
+       password: System.get_env("DATA_DB_PASS"),
+       hostname: System.get_env("DATA_DB_HOST"),
+       database: "mango_prod",
+       pool_size: 10
+
+config :mango, MangoWeb.Endpoint,
+       secret_key_base: System.get_env("SECRET_KEY_BASE")

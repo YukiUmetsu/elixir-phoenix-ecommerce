@@ -20,7 +20,7 @@ defmodule Mango.Mixfile do
   def application do
     [
       mod: {Mango.Application, []},
-      extra_applications: [:logger, :runtime_tools, :httpoison, :bamboo, :bamboo_smtp]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 

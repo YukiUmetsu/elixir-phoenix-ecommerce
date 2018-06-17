@@ -31,3 +31,4 @@ npm-debug.log
 /config/*.secret.exsconfig/dev.exs
 /config/dev.exs
 /config/test.exs
+.deliver/releases/

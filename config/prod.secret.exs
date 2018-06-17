@@ -9,12 +9,12 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 config :mango, MangoWeb.Endpoint,
-  secret_key_base: "8tG4+RPbAjILHGGEf+4jGEiJFa+ZVy1rL1SPsI06LHREnHnDLZSHRIhgxyWcVmNO"
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Configure your database
 config :mango, Mango.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("APP_DB_USERNAME"),
+  password: System.get_env("APP_DB_PASSWORD"),
   database: "mango_prod",
   pool_size: 15

@@ -21,7 +21,7 @@ defmodule MangoWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(%{"token" => token}, socket) do
-    case Phoenix.Token.verify(socket, "socket_login", token) do
+    case Phoenix.Token.verify(socket, "socket_login", token, max_age: 86400) do
       {:ok, user_id} ->
         socket = assign(socket, :user_id, user_id)
         {:ok, socket}
