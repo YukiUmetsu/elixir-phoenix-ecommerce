@@ -10,7 +10,6 @@
   <title>Hello Mango!</title>
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 </head>
-
 <body>
 <%= render "admin_app_nav.html", conn: @conn %>
 <div class="container">

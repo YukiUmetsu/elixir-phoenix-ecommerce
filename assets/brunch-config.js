@@ -2,8 +2,7 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        "js/app.js":/^(js|node_modules|vendor)/,
-        "js/admin.js":/^(admin)/
+        "js/app.js":/^(js|node_modules|vendor)/
       },
       order: {
         before: [
