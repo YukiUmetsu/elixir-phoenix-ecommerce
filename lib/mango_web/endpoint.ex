@@ -10,7 +10,8 @@ defmodule MangoWeb.Endpoint do
   plug Plug.Static,
     at: "/", from: :mango, gzip: true,
     only: ~w(css fonts images product_images js favicon.ico robots.txt),
-    cache_control_for_vsn_requests: "public, max-age=31536000"
+    cache_control_for_vsn_requests: "public, max-age=31536000",
+    cache_control_for_etags: "public,  max-age=31536000"
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
